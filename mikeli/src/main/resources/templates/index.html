@@ -15,30 +15,35 @@
         <div class="row d-flex aling-items-center justify-content-center h-100">
             <div class="col-6 d-flex flex-column align-items-center justify-content-center">
                 <img th:src="@{/img/Logo.png}" alt="logotipo de la empresa" class="img-fluid">
-                <div class="form-floating mb-3 w-75">
-                    <input type="email" class="form-control w-100" id="email" placeholder="name@example.com" required>
-                    <label for="email">Email address</label>
+                <div th:if="${confirm == false}" class="alert alert-danger" role="alert">
+                    El usuario y/o la contraseña son incorrectos.
                 </div>
-                <div class="form-floating w-75">
-                    <input type="password" class="form-control w-100" id="token" placeholder="Password" required>
-                    <label for="token">Password</label>
-                </div>
-                <div class="mt-3 w-75">
-                    <button class="btn btn-outline-success px-2 py-2"> Iniciar sesión </button>
-                    <p class="mt-4">
-                        No tengo cuenta, <a th:href="@{/crearCuenta}">Crear una cuenta</a>
-                    </p>
-                    <div class="d-flex gap-4">
-                        <i class="bi bi-instagram fs-5"></i>
-                        <i class="bi bi-facebook fs-5"></i>
-                        <i class="bi bi-whatsapp fs-5"></i>
-                        <i class="bi bi-youtube fs-5"></i>
-                        <i class="bi bi-twitter fs-5"></i>
+                <form class="w-75" action="#" method="post" th:action="@{/login/usuario}">
+                    <div class="form-floating mb-3 w-100">
+                        <input type="email" class="form-control w-100" id="email" name="email" placeholder="name@example.com" required>
+                        <label for="email">Email address</label>
                     </div>
-                </div>
+                    <div class="form-floating w-100">
+                        <input type="password" class="form-control w-100" id="token" name="token" placeholder="Password" required>
+                        <label for="token">Password</label>
+                    </div>
+                    <div class="mt-3 w-75">
+                        <input type="submit" class="btn btn-outline-success px-2 py-2" value="Iniciar sesión">
+                        <p class="mt-4">
+                            No tengo cuenta, <a th:href="@{/crearCuenta}">Crear una cuenta</a>
+                        </p>
+                        <div class="d-flex gap-4">
+                            <a href="#"><i class="text-dark bi bi-instagram fs-5"></i></a>
+                            <a href="#"><i class="text-dark bi bi-facebook fs-5"></i></a>
+                            <a href="#"><i class="text-dark bi bi-whatsapp fs-5"></i></a>
+                            <a href="#"><i class="text-dark bi bi-youtube fs-5"></i></a>
+                            <a href="#"><i class="text-dark bi bi-twitter fs-5"></i></a>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="col px-3 d-flex flex-column align-items-center justify-content-center" id="fondoInicio">
-                <h2 class="text-warning">Salud conectada</h2>
+                <h1 class="text-warning fw-bold">Salud conectada</h1>
                 <p class="text-light fw-semibold text-center">Una aplicación para tener toda tu salud en un solo sitio, citas médicas, ejercicios, centros, monitoreo de la salud y mucho más...</p>
                 <i class="bi bi-instagram text-dark"></i>
 
