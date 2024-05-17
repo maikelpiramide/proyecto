@@ -35,3 +35,17 @@ nav{
 .menuItem:hover{
     background-color: rgb(238, 238, 238) !important;
 }
+.btn{
+    width: 100px;
+    height: 100px;
+    background-color: #353432;
+    transition: all .5s;
+}
+.btn:hover{
+    width: 110px;
+    height: 110px;
+    background-color: #1c1b1b;
+}
+.btn > .buttonIcon{
+    color:#94BA65;
+}
