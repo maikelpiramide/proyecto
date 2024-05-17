@@ -1,5 +1,6 @@
 package org.example.mikeli.Controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.example.mikeli.Class.Usuario;
 import org.example.mikeli.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,11 @@ public class LoginController {
     }
 
     @PostMapping("/login/usuario")
-    public String loginUsuario(Model model, @RequestParam String email, @RequestParam String token){
+    public String loginUsuario(Model model, @RequestParam String email, @RequestParam String token, HttpSession httpSession) {
 
         Optional<Usuario> usuario = usuarioRepository.getUserByEmailAndToken(email,token);
         if(usuario.isPresent()){
+            httpSession.setAttribute("user",usuario.get().getId());
             model.addAttribute("usuario",usuario);
             return "home";
         }else{
