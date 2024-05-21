@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
@@ -22,17 +23,18 @@ public class LoginController {
     }
 
     @PostMapping("/login/usuario")
-    public String loginUsuario(Model model, @RequestParam String email, @RequestParam String token, HttpSession httpSession) {
+    public ModelAndView loginUsuario(Model model, @RequestParam String email, @RequestParam String token, HttpSession httpSession) {
 
         Optional<Usuario> usuario = usuarioRepository.getUserByEmailAndToken(email,token);
         if(usuario.isPresent()){
             httpSession.setAttribute("user",usuario.get().getId());
             model.addAttribute("usuario",usuario);
-            return "home";
+
+            return new ModelAndView("redirect:/home/usuario");
         }else{
             model.addAttribute("confirm",false);
         }
-        return "index";
+        return new ModelAndView("redirect:/login");
 
     }
 

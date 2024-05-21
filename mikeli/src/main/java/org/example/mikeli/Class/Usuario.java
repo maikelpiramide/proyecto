@@ -1,9 +1,8 @@
 package org.example.mikeli.Class;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 
 @Entity
@@ -20,6 +19,9 @@ public class Usuario {
     private String numeroTarjetaSanitaria;
     private String dni;
     private String telefono;
+
+    @OneToMany(mappedBy = "usuario")
+    private Set<ActividadFisica> actividadesFisicas;
 
     public Usuario(){}
 
@@ -87,6 +89,14 @@ public class Usuario {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Set<ActividadFisica> getActividadesFisicas() {
+        return actividadesFisicas;
+    }
+
+    public void setActividadesFisicas(Set<ActividadFisica> actividadesFisicas) {
+        this.actividadesFisicas = actividadesFisicas;
     }
 
     public void setNumeroTarjetaSanitaria(String numeroTarjetaSanitaria) {

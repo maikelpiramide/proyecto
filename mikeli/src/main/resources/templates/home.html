@@ -9,6 +9,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <!--css personalizado-->
     <link rel="stylesheet" th:href="@{/css/styleHome.css}">
+    <!--cdn de jquery-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!--cdn de leaflet-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.6.0/Control.FullScreen.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.6.0/Control.FullScreen.min.js"></script>
+
 </head>
 <body>
     <!--begin::navbar mobile-->
@@ -241,7 +250,7 @@
                     <div class="col">
                         <div class="row shadow-sm rounded-3 px-3 py-3 mt-2">
                             <div class="col">
-                                <div class="row d-flex gap-3 justify-content-center">
+                                <div class="row d-flex gap-5 justify-content-center">
                                     <a class="btn d-flex align-items-center justify-content-center" >
                                         <i class="bi bi-file-earmark-plus fs-1 buttonIcon"></i>
                                     </a>
@@ -273,15 +282,15 @@
                                     <div class="col d-flex gap-5">
                                         <div class="d-flex flex-column align-items-center justify-content-center">
                                             <i class="bi bi-person-walking text-primary fs-1"></i>
-                                            <p>20.133</p>
+                                            <p th:text="${actividadUsuario.getPasos()}"></p>
                                         </div>
                                         <div class="d-flex flex-column align-items-center justify-content-center">
                                             <i class="bi bi-stopwatch text-primary fs-1"></i>
-                                            <p>2H</p>
+                                            <p th:text="${actividadUsuario.getTiempoActividad()}"></p>
                                         </div>
                                         <div class="d-flex flex-column align-items-center justify-content-center">
                                             <i class="bi bi-fire fs-1 text-danger"></i>
-                                            <p>123</p>
+                                            <p th:text="${actividadUsuario.getCaloriasQuemadas()}"></p>
                                         </div>
                                         <div class="d-flex flex-column align-items-center justify-content-center">
                                             <i class="bi bi-lungs fs-1"></i>
@@ -292,7 +301,15 @@
                             </div>
 
                             <div class="col shadow-sm rounded-3 px-3 py-3">
-
+                                <div class="row">
+                                    <div class="col d-flex align-items-center gap-3">
+                                        <span><i class="bi bi-heart-pulse fs-3 ms-2"></i></span>
+                                        <h5 class="mb-0">Mapa de centros</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="mapa"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -304,6 +321,35 @@
         </div>
     </div>
     <!--end::display page-->
+
+
+    <script>
+        $(document).ready(()=>{
+            console.log("antes de peticion a getcentros")
+            $.ajax({
+                url:"/api/getCentrosMedicos",
+                method:"GET",
+                success:(response)=>{
+                    console.log(response)
+                },
+                error:(err)=>{
+                    console.log("rerror obteninedo los centros")
+                }
+
+            })
+
+            //codigo de mapa
+            var map = L.map('mapa').setView([51.505, -0.09], 13);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            }).addTo(map);
+            map.addControl(new L.Control.Fullscreen());
+            L.marker([51.5, -0.09]).addTo(map)
+                .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+                .openPopup();
+        })
+    </script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
