@@ -1,11 +1,10 @@
 package org.example.mikeli.Class;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.time.LocalTime;
+import java.util.Set;
 
 @Entity
 public class CentroMedico{
@@ -18,6 +17,10 @@ public class CentroMedico{
     private LocalTime apertura;
     private LocalTime cierre;
     private boolean urgencias;
+
+    @OneToMany(mappedBy = "centroMedico")
+    @JsonIgnore
+    private Set<UsuarioCentroCita> usuarioCentroCita;
 
     public CentroMedico() {}
 
@@ -49,6 +52,10 @@ public class CentroMedico{
         return urgencias;
     }
 
+    public Set<UsuarioCentroCita> getUsuarioCentroCita() {
+        return usuarioCentroCita;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -71,6 +78,10 @@ public class CentroMedico{
 
     public void setUrgencias(boolean urgencias) {
         this.urgencias = urgencias;
+    }
+
+    public void setUsuarioCentroCita(Set<UsuarioCentroCita> usuarioCentroCita) {
+        this.usuarioCentroCita = usuarioCentroCita;
     }
 
     @Override

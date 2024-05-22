@@ -23,6 +23,9 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private Set<ActividadFisica> actividadesFisicas;
 
+    @OneToMany(mappedBy = "usuario")
+    private Set<UsuarioCentroCita> usuarioCentroCitas;
+
     public Usuario(){}
 
     //getters
@@ -65,6 +68,10 @@ public class Usuario {
     public String getTelefono() {
         return telefono;
     }
+
+    public Set<UsuarioCentroCita> getCitasMedicas() {
+        return usuarioCentroCitas;
+    }
     //setters
 
     public void setNombre(String nombre) {
@@ -93,6 +100,10 @@ public class Usuario {
 
     public Set<ActividadFisica> getActividadesFisicas() {
         return actividadesFisicas;
+    }
+
+    public void setCitasMedicas(Set<UsuarioCentroCita> citasMedicas) {
+        this.usuarioCentroCitas = citasMedicas;
     }
 
     public void setActividadesFisicas(Set<ActividadFisica> actividadesFisicas) {
