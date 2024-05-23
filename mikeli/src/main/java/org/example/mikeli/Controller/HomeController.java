@@ -28,8 +28,7 @@ public class HomeController {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private UsuarioCentroCitasService usuarioCentroCitasService;
-    @Autowired
-    private ActividadFisicaRepository actividadFisicaRepository;
+
 
     @GetMapping("/home/usuario")
     public String homeUser(HttpSession httpSession, Model model){
@@ -57,17 +56,5 @@ public class HomeController {
         return "home";
     }
 
-    @Transactional
-    @Scheduled(cron = "0 0 0 * * ?") // Ejecutar todos los días a las 00:00
-    public void executeTask(HttpSession httpSession) {
-        // Aquí es donde ejecutas tu query para crear un nuevo registro en la tabla de la base de datos
-        // Por ejemplo, si tienes una entidad llamada 'Registro' y quieres crear un nuevo registro:
-        long idUsuario = (long) httpSession.getAttribute("user");
-        Optional<Usuario> usuario = usuarioRepository.findById(idUsuario);
-        if (usuario.isPresent()) {
-            ActividadFisica actividadFisica = new ActividadFisica();
-            actividadFisica.setUsuario(usuario.get());
-            actividadFisicaRepository.save(actividadFisica);
-        }
-    }
+
 }

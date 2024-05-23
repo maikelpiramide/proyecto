@@ -24,12 +24,16 @@ nav{
     box-shadow: 0 0 8px gray;
 }
 #sidebarMenu{
-    height: 90vh;
+    height: 100%;
     background-color: #E6EFDB;
     width: 250px !important;
 }
+#pageContent{
+    height: 90vh;
+    overflow:auto;
+}
 #userContentHeader{
-    
+
     background-color: white;
 }
 .menuItem:hover{
