@@ -24,13 +24,9 @@ nav{
     box-shadow: 0 0 8px gray;
 }
 #sidebarMenu{
-    height: 100%;
+    height: 90vh;
     background-color: #E6EFDB;
     width: 250px !important;
-}
-#pageContent{
-    height: 90vh;
-    overflow:auto;
 }
 #userContentHeader{
 
@@ -39,21 +35,12 @@ nav{
 .menuItem:hover{
     background-color: rgb(238, 238, 238) !important;
 }
-.btn{
-    width: 100px;
-    height: 100px;
-    background-color: #353432;
-    transition: all .5s;
-}
-.btn:hover{
-
-    background-color: #1c1b1b;
-}
-.btn > .buttonIcon{
-    color:#94BA65;
+#pageContent{
+    height: 90vh;
+    overflow:auto;
 }
 #mapa{
     width: 100%;
-    height: 320px;
+    height: 75vh;
     border-radius: 10px;
 }
