@@ -18,5 +18,6 @@ public interface UsuarioRepository extends CrudRepository<Usuario,Long> {
     @Query("select a from ActividadFisica a where a.usuario = :usuario and a.fecha = :fecha")
     ActividadFisica getActividadFisicaByUserAndDate(Usuario usuario, LocalDate fecha);
 
-
+    @Query("select u from Usuario u where u.nombre = :nombre and u.primerApellido = :primerApellido and u.segundoApellido = :segundoApellido and u.email = :email ")
+    Optional<Usuario> getUserForCitaMedicaForm(String nombre, String primerApellido, String segundoApellido, String email);
 }

@@ -34,4 +34,12 @@ public class MotivoCita {
     public void setUsuarioCentroCita(Set<UsuarioCentroCita> usuarioCentroCita) {
         this.usuarioCentroCita = usuarioCentroCita;
     }
+
+    @Override
+    public String toString() {
+        return "MotivoCita{" +
+                "id=" + id +
+                ", motivo='" + motivo + '\'' +
+                '}';
+    }
 }

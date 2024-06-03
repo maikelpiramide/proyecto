@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 //servicio para crear registros de actividad física automaticamente cada 24h
@@ -25,8 +27,10 @@ public class ActividadFisicaService {
     public void executeTask() {
         List<Usuario> usuarios = (List<Usuario>) usuarioRepository.findAll();
         usuarios.forEach(user->{
-            ActividadFisica actividadFisica = new ActividadFisica();
-            actividadFisica.setUsuario(user);
+            LocalDate fecha = LocalDate.now();
+            LocalTime tiempoActividad = LocalTime.of(0,0,0);
+            ActividadFisica actividadFisica = new ActividadFisica(0,tiempoActividad,0,fecha,user);
+            //actividadFisica.setUsuario(user);
             actividadFisicaRepository.save(actividadFisica);
         });
     }

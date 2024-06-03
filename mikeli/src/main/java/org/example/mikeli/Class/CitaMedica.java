@@ -17,6 +17,11 @@ public class CitaMedica {
 
     public CitaMedica(){}
 
+    public CitaMedica(LocalDateTime fecha, boolean activa) {
+        this.fecha = fecha;
+        this.activa = activa;
+    }
+
     public long getId() {
         return id;
     }
@@ -39,6 +44,10 @@ public class CitaMedica {
 
     public void setActiva(boolean activa) {
         this.activa = activa;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setUsuarioCentroCitas(UsuarioCentroCita usuarioCentroCitas) {

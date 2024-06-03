@@ -19,6 +19,9 @@
                 <div class="col">
                     <form action="#" th:action="@{/crearCuenta/CrearUsuario}" method="POST" th:object="${usuario}">
                         <div class="row">
+                            <div th:if="error == true" class="alert alert-danger" role="alert">
+                                Ha ocurrido un error al crear la cuenta, inténteno más tarde.
+                            </div>
                             <h2 class="text-dark">Crear cuenta de usuario</h2>
                         </div>
                         <div class="row mt-2">
