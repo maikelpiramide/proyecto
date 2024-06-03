@@ -26,6 +26,8 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private Set<UsuarioCentroCita> usuarioCentroCitas;
 
+    private String avatar;
+
     public Usuario(){}
 
     //getters
@@ -67,6 +69,10 @@ public class Usuario {
 
     public String getTelefono() {
         return telefono;
+    }
+
+    public String getAvatar() {
+        return avatar;
     }
 
     public Set<UsuarioCentroCita> getCitasMedicas() {
@@ -122,6 +128,14 @@ public class Usuario {
         this.telefono = telefono;
     }
 
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -135,6 +149,7 @@ public class Usuario {
                 ", numeroTarjetaSanitaria='" + numeroTarjetaSanitaria + '\'' +
                 ", dni='" + dni + '\'' +
                 ", telefono='" + telefono + '\'' +
+                ", avatar='" + avatar + '\'' +
                 '}';
     }
 }

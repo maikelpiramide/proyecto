@@ -2,12 +2,11 @@ package org.example.mikeli.Controller;
 
 
 
+import jakarta.servlet.http.HttpSession;
 import org.example.mikeli.Class.CitaMedica;
 import org.example.mikeli.Class.Usuario;
 import org.example.mikeli.Class.UsuarioCentroCita;
-import org.example.mikeli.Repository.CentroMedicoRepository;
-import org.example.mikeli.Repository.MotivoCitaRepository;
-import org.example.mikeli.Repository.UsuarioRepository;
+import org.example.mikeli.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,11 +32,21 @@ public class FormularioCitaController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private UsuarioCentroCitaRepository usuarioCentroCitaRepository;
+
+    @Autowired
+    private CitaMedicaRepository citaMedicaRepository;
+
     @GetMapping("/home/solicitarCita")
-    public String pedirCita(Model model) {
+    public String pedirCita(Model model, HttpSession httpSession) {
         model.addAttribute("centros",centroMedicoRepository.findAll());
         model.addAttribute("motivosCita",motivoCitaRepository.findAll());
         model.addAttribute("usuarioCentroCita", new UsuarioCentroCita());
+        Optional<Usuario> usuario = usuarioRepository.findById((long)httpSession.getAttribute("user"));
+        usuario.ifPresent(user->{
+            model.addAttribute("usuario",user);
+        });
         return "formularioCita";
     }
 
@@ -48,20 +57,18 @@ public class FormularioCitaController {
         if(usuarioCita.isPresent()) {
             UsuarioCentroCita usuarioCentroCitaForm = usuarioCentroCita;
             usuarioCentroCitaForm.setUsuario(usuarioCita.get());
+
             LocalDateTime fecha = LocalDateTime.of(dia,hora);
+
             CitaMedica citaMedica = new CitaMedica(fecha,true);
+            citaMedicaRepository.save(citaMedica);
+
             usuarioCentroCitaForm.setCitaMedica(citaMedica);
+            usuarioCentroCitaRepository.save(usuarioCentroCitaForm);
 
             return new ModelAndView("redirect:/home/usuario");
+            //System.out.println(usuarioCentroCitaForm);
         }
-        LocalDateTime fecha = LocalDateTime.of(dia,hora);
-        System.out.println(usuarioCentroCita);
-        System.out.println(nombre);
-        System.out.println(primerApellido);
-        System.out.println(segundoApellido);
-        System.out.println(email);
-        System.out.println(fecha);
-        System.out.println();
         redirectAttributes.addFlashAttribute("errorUser", true);
         return new ModelAndView("redirect:/home/solicitarCita");
     }
