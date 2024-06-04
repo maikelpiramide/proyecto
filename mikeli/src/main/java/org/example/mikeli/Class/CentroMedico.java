@@ -84,6 +84,7 @@ public class CentroMedico{
         this.usuarioCentroCita = usuarioCentroCita;
     }
 
+
     @Override
     public String toString() {
         return "CentroMedico{" +

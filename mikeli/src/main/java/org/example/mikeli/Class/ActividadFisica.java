@@ -22,6 +22,14 @@ public class ActividadFisica {
 
     public ActividadFisica() {}
 
+    public ActividadFisica(int pasos, LocalTime tiempoActividad, int caloriasQuemadas, LocalDate fecha, Usuario usuario) {
+        this.pasos = pasos;
+        this.tiempoActividad = tiempoActividad;
+        this.caloriasQuemadas = caloriasQuemadas;
+        this.fecha = fecha;
+        this.usuario = usuario;
+    }
+
     public long getId() {
         return id;
     }

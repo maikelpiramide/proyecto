@@ -19,12 +19,15 @@
                 <div class="col">
                     <form action="#" th:action="@{/crearCuenta/CrearUsuario}" method="POST" th:object="${usuario}">
                         <div class="row">
+                            <div th:if="error == true" class="alert alert-danger" role="alert">
+                                Ha ocurrido un error al crear la cuenta, inténteno más tarde.
+                            </div>
                             <h2 class="text-dark">Crear cuenta de usuario</h2>
                         </div>
                         <div class="row mt-2">
 
                             <div class="col">
-
+                                <input type="hidden" value="https://mikeli.s3.amazonaws.com/avatarUser1.jpg" th:field="*{avatar}">
                                 <input type="text" placeholder="Nombre" class="form-control" name="nombre" required th:field="*{nombre}">
                                 <input type="text" placeholder="Primer apellido" class="form-control mt-3" name="primerApellido" required th:field="*{primerApellido}">
                             </div>

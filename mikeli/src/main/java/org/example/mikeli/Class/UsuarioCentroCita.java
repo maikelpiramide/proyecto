@@ -24,6 +24,8 @@ public class UsuarioCentroCita {
     @JoinColumn(name = "fk_id_motivo_cita",nullable = false)
     private MotivoCita motivoCita;
 
+    private String descripcionMotivo;
+
     public UsuarioCentroCita() {}
 
     public long getId() {
@@ -46,6 +48,10 @@ public class UsuarioCentroCita {
         return motivoCita;
     }
 
+    public String getDescripcionMotivo() {
+        return descripcionMotivo;
+    }
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
@@ -62,6 +68,14 @@ public class UsuarioCentroCita {
         this.motivoCita = motivoCita;
     }
 
+    public void setDescripcionMotivo(String descripcionMotivo) {
+        this.descripcionMotivo = descripcionMotivo;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "UsuarioCentroCita{" +
@@ -70,6 +84,7 @@ public class UsuarioCentroCita {
                 ", citaMedica=" + citaMedica +
                 ", centroMedico=" + centroMedico +
                 ", motivoCita=" + motivoCita +
+                ", descripcionMotivo='" + descripcionMotivo + '\'' +
                 '}';
     }
 }

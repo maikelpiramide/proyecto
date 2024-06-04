@@ -18,6 +18,8 @@
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 
+    <link rel="icon" type="image/x-icon" th:href="@{/img/LogoFabIcon.png}">
+
 </head>
 <body>
     <!--begin::navbar mobile-->
@@ -27,11 +29,11 @@
                 <div class="navbar-brand d-flex align-items-center">
                     
                     <div class="dropdown contenedorImagenUsuario ms-2 px-0 py-0">
-                        <img class="dropdown-toggle userAvatar" type="button" data-bs-toggle="dropdown" aria-expanded="false" src="https://mikeli.s3.amazonaws.com/avatarUser1.jpg"></img>
+                        <img class="dropdown-toggle userAvatar" type="button" data-bs-toggle="dropdown" aria-expanded="false" th:src="${usuario.avatar}"></img>
                         <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Editar perfil</a></li>
+                        <li><a class="dropdown-item" href="/home/editarPerfil">Editar perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                        <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -41,35 +43,42 @@
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                 <!--<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Mikeli</h5>-->
-                <img src="IconoLogo.png" alt="Logo de la empresa" class="img-fluid offcanvas-title" id="offcanvasNavbarLabel">
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <img th:src="@{/img/IconoLogo.png}" alt="Logo de la empresa" class="img-fluid offcanvas-title" id="offcanvasNavbarLabel">
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                        <hr class="dropdown-divider">
+                <div class="offcanvas-body" id="navMovil">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active fs-4 fw-semibold" aria-current="page" href="/home/usuario">Home</a>
                         </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 fw-semibold" href="/home/mapaCentros">Mapa de centros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 fw-semibold" href="/home/usuario">Contactos emergencia</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 fw-semibold" href="/home/usuario">Ejercicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 fw-semibold" href="/home/usuario">Consultar datos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 fw-semibold" href="/home/verCitas">Ver citas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 fw-semibold" href="/home/solicitarCita">Solicitar cita</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 fw-semibold" href="/home/usuario">Modificar citas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 fw-semibold" href="/home/usuario">Actividad diaria</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 fw-semibold" href="/home/usuario">Entrenamiento</a>
+                        </li>
                     </ul>
-                    </li>
-                </ul>
-                <form class="d-flex mt-3" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
                 </div>
             </div>
             </div>
@@ -116,7 +125,7 @@
                         <!--begin::menu item-->
                         <div class="row">
                             <div class="col">
-                                <a href="/" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
+                                <a href="/home/usuario" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
                                     <span><i class="bi bi-telephone fs-4 ms-2"></i></span>
                                     <span>Contactos emergencia</span>
                                 </a>
@@ -126,7 +135,7 @@
                         <!--begin::menu item-->
                         <div class="row">
                             <div class="col">
-                                <a href="/" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
+                                <a href="/home/usuario" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
                                     <span><i class="bi bi-bandaid fs-4 ms-2"></i></span>
                                     <span>Ejercicios</span>
                                 </a>
@@ -145,7 +154,7 @@
                         <!--begin::menu item-->
                         <div class="row">
                             <div class="col">
-                                <a href="/" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
+                                <a href="/home/usuario" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
                                     <span><i class="bi bi-file-earmark-bar-graph fs-4 ms-2"></i></span>
                                     <span>Consultar datos</span>
                                 </a>
@@ -155,7 +164,7 @@
                         <!--begin::menu item-->
                         <div class="row">
                             <div class="col">
-                                <a href="/" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
+                                <a href="/home/verCitas" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
                                     <span><i class="bi bi-file-earmark-medical fs-4 ms-2"></i></span>
                                     <span>Ver citas</span>
                                 </a>
@@ -165,7 +174,7 @@
                         <!--begin::menu item-->
                         <div class="row">
                             <div class="col">
-                                <a href="/" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
+                                <a href="/home/solicitarCita" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
                                     <span><i class="bi bi-file-earmark-plus fs-4 ms-2"></i></span>
                                     <span>Solicitar cita</span>
                                 </a>
@@ -175,7 +184,7 @@
                         <!--begin::menu item-->
                         <div class="row">
                             <div class="col">
-                                <a href="/" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
+                                <a href="/home/usuario" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
                                     <span><i class="bi bi-file-earmark-arrow-up fs-4 ms-2"></i></span>
                                     <span>Modificar citas</span>
                                 </a>
@@ -194,7 +203,7 @@
                         <!--begin::menu item-->
                         <div class="row">
                             <div class="col">
-                                <a href="/" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
+                                <a href="/home/usuario" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
                                     <span><i class="bi bi-heart-pulse fs-4 ms-2"></i></span>
                                     <span>Actividad diaria</span>
                                 </a>
@@ -204,7 +213,7 @@
                         <!--begin::menu item-->
                         <div class="row">
                             <div class="col">
-                                <a href="/" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
+                                <a href="/home/usuario" class="text-decoration-none text-dark fs-6 fw-semibold bg-light rounded-2 py-1 w-100 d-flex align-items-center gap-3 px-2 menuItem">
                                     <span><i class="bi bi-lungs fs-4 ms-2"></i></span>
                                     <span>Entrenamientos</span>
                                 </a>
@@ -234,9 +243,9 @@
                         <div class="dropdown contenedorImagenUsuario ms-2 px-0 py-0">
                             <img class="dropdown-toggle userAvatar" type="button" data-bs-toggle="dropdown" aria-expanded="false" src="https://mikeli.s3.amazonaws.com/avatarUser1.jpg"></img>
                             <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Editar perfil</a></li>
+                            <li><a class="dropdown-item" href="/home/editarPerfil">Editar perfil</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                            <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
                             </ul>
                         </div>
                         <!--end:: avatar user-->
@@ -304,19 +313,19 @@
                                 <div class="row mt-3">
                                     <div class="col">
                                         <div class="row d-flex gap-2 justify-content-evenly">
-                                            <a class="btn d-flex align-items-center justify-content-center shadow-sm" >
+                                            <a href="/home/solicitarCita" class="btn d-flex align-items-center justify-content-center shadow-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Solicitar cita">
                                                 <i class="bi bi-file-earmark-plus fs-1 buttonIcon"></i>
                                             </a>
-                                            <a class="btn d-flex align-items-center justify-content-center shadow-sm" >
+                                            <a href="/home/verCitas" class="btn d-flex align-items-center justify-content-center shadow-sm" title="Ver citas" >
                                                 <i class="bi bi-file-earmark fs-1 buttonIcon" ></i>
                                             </a>
-                                            <a class="btn d-flex align-items-center justify-content-center shadow-sm" >
+                                            <a href="/home/mapaCentros" class="btn d-flex align-items-center justify-content-center shadow-sm" title="Mapa de centros" >
                                                 <i class="bi bi-pin-map-fill fs-1 buttonIcon" ></i>
                                             </a>
-                                            <a class="btn d-flex align-items-center justify-content-center shadow-sm" >
+                                            <a class="btn d-flex align-items-center justify-content-center shadow-sm" title="Contactos de emergencia" >
                                                 <i class="bi bi-telephone fs-1 buttonIcon"></i>
                                             </a>
-                                            <a class="btn d-flex align-items-center justify-content-center shadow-sm" >
+                                            <a class="btn d-flex align-items-center justify-content-center shadow-sm" title="Actividad diaria" >
                                                 <i class="bi bi-heart-pulse fs-1 buttonIcon" ></i>
                                             </a>
                                         </div>

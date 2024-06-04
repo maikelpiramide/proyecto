@@ -17,8 +17,8 @@ public class UsuarioCentroCitasService {
     @Autowired
     private UsuarioCentroCitaRepository userCentroCitaRepository;
 
-    public Page<UsuarioCentroCita> findPaginatedByUserLastTen(Usuario user) {
-        Pageable pageable = PageRequest.of(0, 10);
+    public Page<UsuarioCentroCita> findPaginatedByUserLastTen(Usuario user,int pagina,int numeroDatos) {
+        Pageable pageable = PageRequest.of(pagina, numeroDatos);
 
         return  userCentroCitaRepository.findAllByUsuarioOrderByIdDesc(user,pageable);
     }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 
@@ -46,11 +47,12 @@ public class HomeController {
 
         usuario.ifPresent((user) -> {
             //System.out.println(usuarioRepository.getActividadFisicaByUserAndDate(user,fechaActual));
-            System.out.println(usuarioCentroCitasService.findPaginatedByUserLastTen(user));
-            model.addAttribute("citasUsuario", usuarioCentroCitasService.findPaginatedByUserLastTen(user));
+            //System.out.println(usuarioCentroCitasService.findPaginatedByUserLastTen(user,0,5));
+            model.addAttribute("citasUsuario", usuarioCentroCitasService.findPaginatedByUserLastTen(user,0,5));
             model.addAttribute("formatoFecha", formatoFecha);
             model.addAttribute("formatoHora",formatoHora);
             model.addAttribute("actividadUsuario",usuarioRepository.getActividadFisicaByUserAndDate(user,fechaActual));
+            model.addAttribute("usuario",user);
         });
         
         return "home";
